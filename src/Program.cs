@@ -59,15 +59,13 @@ namespace src
 
                 Console.WriteLine("Введите кол-во лет:", i);
                 string age=Console.ReadLine();
-                bool Age = age.AsEnumerable().Any(ch => char.IsLetter(ch));
-                if (!Age)
-                    People[i].Age = Convert.ToInt32(age);
-                else
+                bool Age;
+                do
                 {
-                    Console.WriteLine("Год не должен содержать буквы");
+                    Age = age.AsEnumerable().Any(ch => char.IsLetter(ch));
+                    age = age.Replace(" ", "");
                 }
-                while (Age) ;
-                
+                while (!Age || age == null);
             }
         }
         static public void Sortirovka(Person[] People)
