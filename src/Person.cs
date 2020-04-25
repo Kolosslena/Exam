@@ -8,9 +8,9 @@ namespace src
 {
     class Person
     {
-        private string fam =" ";
-        private string name = " ";
-        private int age = 0;
+         string fam =" ";
+         string name = " ";
+         int age = 0;
 
         public string Fam
         {
