@@ -10,29 +10,36 @@ namespace src
     class Program
     {
         private static int A = 0;
-        private static Person[] People;
         static void Main(string[] args)
         {
-            A = Convert.ToInt32(Console.ReadLine());
-            People = new Person[A];
-        }
-        private static void ReadA()
-        {
-            Console.WriteLine("Введите целочисленный размер массива:");
-            string read = Console.ReadLine();
-            while (!Int32.TryParse(read, out A))
+            try
             {
-                Console.WriteLine("Некорректный ввод");
-                read = Console.ReadLine();
+                        Person[] People;
+        Console.WriteLine("Введите размер массива");
+                string read = Console.ReadLine();
+                while (!Int32.TryParse(read, out A))
+                {
+                    Console.WriteLine("Введите целое число");
+                    read = Console.ReadLine();
+                }
+                People = new Person[A];
+                FillPeople(People);
+                Sortirovka(People);
+                SaveInFile(People);
+                Console.ReadKey();
             }
-        }
-        private static void FillPeople()
-        {
-            for (int i = 0; i < People.Length; i++)
+            catch (Exception ex)
             {
-                Console.WriteLine("Введите" + (i + 1) + "й элемент массива");
+                Console.WriteLine(ex.ToString());
+            }
+
+        }
+        private static void FillPeople(Person [] People)
+        {
+            for (int i = 0; i < A; i++)
+            {
                 People[i] = new Person();
-                Console.WriteLine("Введите фамилию:");
+                Console.WriteLine("Введите фамилию:", i);
                 string fam = Console.ReadLine();
                 while (HasStrDigits(fam))
                 {
@@ -41,7 +48,7 @@ namespace src
                 }
                 People[i].Fam = fam;
 
-                Console.WriteLine("Введите имя:");
+                Console.WriteLine("Введите имя:", i);
                 string name = Console.ReadLine();
                 while (HasStrDigits(name))
                 {
@@ -50,6 +57,7 @@ namespace src
                 }
                 People[i].Name = name;
 
+                Console.WriteLine("Введите кол-во лет:", i);
                 string read = Console.ReadLine();
                 bool Read = read.AsEnumerable().Any(ch => char.IsLetter(ch));
                 if (!Read)
@@ -61,11 +69,11 @@ namespace src
                 while (Read) ;
             }
         }
-        static public void Sortirovka()
+        static public void Sortirovka(Person[] People)
         {
-            People.OrderBy(r => r.Fam).ThenBy(r => r.Name).ToArray();
+            Person[] p = People.AsQueryable<Person>().OrderByDescending(c => c.Fam).ThenByDescending(c => c.Name).ToArray();
         }
-        static public void SaveInFile()
+        static public void SaveInFile(Person[] People)
         {
             using (StreamWriter sw = new StreamWriter("file.txt"))
             {
