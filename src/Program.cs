@@ -55,7 +55,7 @@ namespace src
                     People[i].Age = Convert.ToInt32(read);
                 else
                 {
-                    Console.WriteLine("Год не должен содержать буквы")
+                    Console.WriteLine("Год не должен содержать буквы");
                 }
                 while (Read) ;
             }
