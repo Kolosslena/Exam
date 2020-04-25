@@ -58,20 +58,21 @@ namespace src
                 People[i].Name = name;
 
                 Console.WriteLine("Введите кол-во лет:", i);
-                string read = Console.ReadLine();
-                bool Read = read.AsEnumerable().Any(ch => char.IsLetter(ch));
-                if (!Read)
-                    People[i].Age = Convert.ToInt32(read);
+                string age=Console.ReadLine();
+                bool Age = age.AsEnumerable().Any(ch => char.IsLetter(ch));
+                if (!Age)
+                    People[i].Age = Convert.ToInt32(age);
                 else
                 {
                     Console.WriteLine("Год не должен содержать буквы");
                 }
-                while (Read) ;
+                while (Age) ;
+                
             }
         }
         static public void Sortirovka(Person[] People)
         {
-            Person[] p = People.AsQueryable<Person>().OrderByDescending(c => c.Fam).ThenByDescending(c => c.Name).ToArray();
+            Person[] p = People.AsQueryable<Person>().OrderBy(c => c.Fam).ThenBy(c => c.Name).ToArray();
         }
         static public void SaveInFile(Person[] People)
         {
