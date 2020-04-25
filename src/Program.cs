@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace src
 {
@@ -63,6 +64,16 @@ namespace src
         static public void Sortirovka()
         {
             People.OrderBy(r => r.Fam).ThenBy(r => r.Name).ToArray();
+        }
+        static public void SaveInFile()
+        {
+            using (StreamWriter sw = new StreamWriter("file.txt"))
+            {
+                foreach (Person a in People)
+                {
+                    sw.WriteLine(a.Fam + "; " + a.Name + "; " + a.Age + "; ");
+                }
+            }
         }
         private static bool HasStrDigits(string str)
         {
