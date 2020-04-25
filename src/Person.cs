@@ -8,8 +8,24 @@ namespace src
 {
     class Person
     {
-        string fam =" ";
-        string name = " ";
-        int age = 0;
+        private string fam =" ";
+        private string name = " ";
+        private int age = 0;
+
+        public string Fam
+        {
+            get { return this.fam; }
+            set { this.fam = value; }
+        }
+        public string Name
+        {
+            get { return this.name; }
+            set { this.name = value; }
+        }
+        public int Age
+        {
+            get { return this.age; }
+            set { this.age = value; }
+        }
     }
 }
