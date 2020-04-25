@@ -60,6 +60,10 @@ namespace src
                 while (Read) ;
             }
         }
+        static public void Sortirovka()
+        {
+            People.OrderBy(r => r.Fam).ThenBy(r => r.Name).ToArray();
+        }
         private static bool HasStrDigits(string str)
         {
             bool resp = false;
